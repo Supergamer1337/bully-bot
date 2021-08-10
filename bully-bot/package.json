@@ -4,7 +4,9 @@
 	"description": "",
 	"scripts": {
 		"compile": "tsc --watch",
-		"watch": "nodemon ./dist/index.js"
+		"watch": "nodemon ./dist/index.js",
+		"clear-dist": "rm -r dist/",
+		"build-docker": "pnpm clear-dist && tsc && sudo docker build -t supergamer1337/bully-bot ."
 	},
 	"author": "",
 	"license": "ISC",
