@@ -1,15 +1,21 @@
-import { Client, Intents } from 'discord.js';
+import { Client, Intents, Message } from 'discord.js';
+import checkIfMeme from './checkIfMeme';
+import { CORTEXUS } from './constants';
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
 });
 
-client.on('connection', () => {
-	console.log('Connected to Cortexus bully.');
+client.on('ready', () => {
+	console.log(`Authenticated as ${client?.user?.tag}`);
 });
 
-client.on('message', msg => {
-	if (msg.author.id === '228215503632596993') {
+client.on('disconnect', () => {
+	console.log('Disconnected from Discord...');
+});
+
+client.on('messageCreate', (msg: Message) => {
+	if (msg.author.id === CORTEXUS && checkIfMeme(msg)) {
 		msg.reply({
 			files: ['./assets/unfunny.mp4']
 		});
