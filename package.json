@@ -1,12 +1,14 @@
 {
-	"name": "anti-cortexus-bot",
+	"name": "bully-bot",
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
 		"compile": "tsc --build --watch",
 		"watch": "nodemon ./dist/index.js",
 		"clear-dist": "rm -r dist/",
-		"build-docker": "pnpm clear-dist && tsc --build && sudo docker build -t supergamer1337/bully-bot ."
+		"docker-build": "tsc --build && docker build -t supergamer1337/bully-bot .",
+		"docker-push": "docker push supergamer1337/bully-bot",
+		"docker-build-push": "pnpm clear-dist && pnpm docker-build && pnpm docker-push"
 	},
 	"author": "",
 	"license": "ISC",
