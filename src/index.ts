@@ -1,6 +1,8 @@
 import { Client, Intents, Message } from 'discord.js';
 import checkIfMeme from './checkIfMeme';
-import { CORTEXUS } from './constants';
+import { config } from 'dotenv';
+config();
+import { BULLY_CHANCE, TOKEN } from './config/env.config';
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
@@ -15,11 +17,13 @@ client.on('disconnect', () => {
 });
 
 client.on('messageCreate', (msg: Message) => {
-	if (msg.author.id === CORTEXUS && checkIfMeme(msg)) {
+	if (msg.author.bot) return;
+
+	if (checkIfMeme(msg) && Math.random() <= BULLY_CHANCE) {
 		msg.reply({
 			files: ['./assets/unfunny.mp4']
 		});
 	}
 });
 
-client.login('ODczNjQ4MDY5MDA5MzU0NzUy.YQ7eKw.2aKobD6prqN1A8OChr1m7w-zbSI');
+client.login(TOKEN);
