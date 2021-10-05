@@ -3,3 +3,4 @@ dockerfile
 .dockerignore
 tsconfig.json
 src/
+.env
