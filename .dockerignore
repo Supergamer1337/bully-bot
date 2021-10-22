@@ -4,3 +4,4 @@ dockerfile
 tsconfig.json
 src/
 .env
+assets/
